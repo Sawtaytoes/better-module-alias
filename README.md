@@ -22,15 +22,24 @@ _**NOTE:** Using `$` is a way of namespacing imports so you can easily know whic
 
 _**NOTE:** Using `$` is considered a best-practice so it doesn't interfere with `@`-scoped npm packages._
 
+Before doing anything, you will need to import `better-module-alias` at the top of your `index.js` file:
+
+```js
+require('better-module-alias')(__dirname)
+
+// or
+
+import betterModuleAlias from 'better-module-alias'
+betterModuleAlias(__dirname)
+```
+
 When you want to require an aliased file, do it like so:
 
 ```js
 const someModule = require('$utils/someModule')
-```
 
-or
+// or
 
-```js
 import someModule from '$utils/someModule'
 ```
 

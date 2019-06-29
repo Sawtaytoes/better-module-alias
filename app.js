@@ -1,3 +1,5 @@
+require('./setupModuleAliases')(__dirname)
+
 const assert = require('assert')
 const text = require('$dirTest')
 
@@ -7,3 +9,6 @@ assert
 	'It works!',
 	"Directory aliasing isn't functioning correctly.",
 )
+
+console
+.info('All tests passing!')
