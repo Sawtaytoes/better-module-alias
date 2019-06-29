@@ -1,0 +1,27 @@
+{
+  "name": "better-module-alias",
+  "version": "1.0.0",
+  "description": "An improved version of the fantastic module-alias package designed to include support for package linking in `node_modules/`.",
+  "license": "MITNFA",
+  "scripts": {
+    "debug": "nodemon --inspect app.js",
+    "lint": "node app.js lint",
+    "lint:watch": "nodemon app.js lint",
+    "start": "yarn && nodemon app.js",
+    "test": "ava",
+    "test:watch": "ava --watch"
+  },
+  "engines": {
+    "node": ">=8.11.4",
+    "yarn": ">=1.6.0"
+  },
+  "_moduleAliases": {
+    "$dirTest": "./dirTest"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@ghadyani-eslint/eslint-config-node": "^1.1.0"
+  }
+}

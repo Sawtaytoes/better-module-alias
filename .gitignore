@@ -1,0 +1,12 @@
+# Logs
+logs
+*.log*
+
+# Misc
+.DS_Store
+[Tt]humbs.db
+*.dmp
+._*
+
+# npm
+node_modules
