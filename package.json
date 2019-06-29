@@ -5,11 +5,8 @@
   "license": "MITNFA",
   "scripts": {
     "debug": "nodemon --inspect app.js",
-    "lint": "node app.js lint",
-    "lint:watch": "nodemon app.js lint",
-    "start": "yarn && nodemon app.js",
-    "test": "ava",
-    "test:watch": "ava --watch"
+    "start": "yarn && nodemon index.js",
+    "test": "yarn && node app.js"
   },
   "engines": {
     "node": ">=8.11.4",
