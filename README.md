@@ -1,5 +1,5 @@
 # Better Module Aliases
-An improved version of the fantastic module-alias package designed to include support for package linking in `node_modules/`.
+A forked and improved version of the fantastic [`module-alias`](https://github.com/ilearnio/module-alias) package designed to include support for package linking in `node_modules/`.
 
 This fixes the issue of having to do `require('../../../../some/deep/module')`.
 
