@@ -12,8 +12,8 @@ In your `package.json`, add an object formatted like this:
 ```json
 {
   "_moduleAliases": {
-    "$tests": "./tests"
-    "$utils": "./utils"
+    "$tests": "./tests",
+    "$utils": "./utils",
   },
 }
 ```
