@@ -1,13 +1,22 @@
-# Better Module Aliases
-An improved version of the fantastic [`module-alias`](https://github.com/ilearnio/module-alias) package designed to include support for package linking in `node_modules/`.
+_[`better-module-alias`](https://www.npmjs.com/package/better-module-alias) is an improved version of the fantastic [`module-alias`](https://github.com/ilearnio/module-alias) package._
 
-This fixes the issue of having to do `require('../../../../some/deep/module')`.
+# Better Module Alias
+Fix the issue of having to do relative paths like:
+```
+require('../../../../some/deep/module')
+```
 
-Instead, this package lets you do `require('$utils/some/deep/module')`.
+Instead, make your code look like:
+```
+require('$utils/some/deep/module')
+```
 
-## How to use it?
+## How do I use it?
 
-In your `package.json`, add an object formatted like this:
+### package.json
+_This package uses the same `package.json` formatting as [`module-alias`](https://github.com/ilearnio/module-alias)._
+
+In your `package.json`, add a `_moduleAliases` object formatted like this:
 
 ```json
 {
@@ -18,11 +27,11 @@ In your `package.json`, add an object formatted like this:
 }
 ```
 
-_**NOTE:** Using `$` is a way of namespacing imports so you can easily know which ones were configured from `better-module-alias`._
+- _**NOTE:** Prefixing with `$` is considered a best-practice so it doesn't interfere with `@`-scoped npm packages._
+- _**NOTE:** We prefix a `$` so it's obvious which imports are from npm packages and which come from `better-module-alias`._
 
-_**NOTE:** Using `$` is considered a best-practice so it doesn't interfere with `@`-scoped npm packages._
-
-Before doing anything, you will need to import `better-module-alias` at the top of your `index.js` file:
+### Node.js
+If you want to use `better-module-alias` in Node.js, you'll need to import this package at the top of the file that gets run in your `node` command such as `./index.js`.
 
 ```js
 require('better-module-alias')(__dirname)
@@ -43,18 +52,38 @@ const someModule = require('$utils/someModule')
 import someModule from '$utils/someModule'
 ```
 
-##  Usage with WebPack
+_**NOTE:** `better-module-alias` has to be imported before any `$` imports in your root code file, or it won't work._
+
+#### Examples
+
+##### Will work:
+```js
+// index.js
+require('better-module-alias')(__dirname)
+const someModule = require('$utils/someModule')
+```
+
+##### Won't work:
+```js
+// index.js
+const someModule = require('$utils/someModule')
+require('better-module-alias')(__dirname)
+```
+
+### Webpack
 Webpack has a built in support for aliases and custom modules directories.
 
-Add this code to your Webpack config:
+Add this code to your Webpack config to get it working with `better-module-alias`:
 
 ```js
 const packageJson = require('./package.json')
 
-module.exports = {
+const webpackConfig = {
   // ...
   resolve: {
-    alias: packageJson._moduleAliases || {},
+    alias: {
+      ...packageJson._moduleAliases,
+    },
   },
   // ...
 }
