@@ -20,5 +20,9 @@
   },
   "devDependencies": {
     "@ghadyani-eslint/eslint-config-node": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sawtaytoes/better-module-alias.git"
   }
 }
