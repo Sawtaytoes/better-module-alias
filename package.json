@@ -1,6 +1,6 @@
 {
   "name": "better-module-alias",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An improved version of the fantastic module-alias package designed to include support for package linking in `node_modules/`.",
   "license": "MITNFA",
   "scripts": {
