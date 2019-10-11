@@ -70,6 +70,28 @@ const someModule = require('$utils/someModule')
 require('better-module-alias')(__dirname)
 ```
 
+#### Issues with `fs`
+
+Libraries like `fs` won't work with `better-module-alias` because it's overriding the `require` functionality of CommonJS, not file lookups in other libraries. The way to get around that is by using `require.resolve`.
+
+Where you might have done:
+```js
+fs.readFile(
+  '../../../../some/deep/module',
+  callback,
+)
+```
+
+You can use `require.resolve` to do this instead:
+```js
+fs.readFile(
+  require.resolve('$utils/some/deep/module'),
+  callback,
+)
+```
+
+That'll allow you to get the same functionality without having to have 2 ways of writing the same code.
+
 ### Webpack
 Webpack has a built in support for aliases and custom modules directories.
 
