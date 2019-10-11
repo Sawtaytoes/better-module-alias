@@ -31,6 +31,8 @@ In your `package.json`, add a `_moduleAliases` object formatted like this:
 - _**NOTE:** We prefix a `$` so it's obvious which imports are from npm packages and which come from `better-module-alias`._
 
 ### Node.js
+_**NOTE:** `better-module-alias` has to be imported before any `$` imports in your root code file, or it won't work._
+
 If you want to use `better-module-alias` in Node.js, you'll need to import this package at the top of the file that gets run in your `node` command such as `./index.js`.
 
 ```js
@@ -51,8 +53,6 @@ const someModule = require('$utils/someModule')
 
 import someModule from '$utils/someModule'
 ```
-
-_**NOTE:** `better-module-alias` has to be imported before any `$` imports in your root code file, or it won't work._
 
 #### Examples
 
