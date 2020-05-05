@@ -8,6 +8,7 @@
     "start": "yarn && nodemon index.js",
     "test": "yarn && node app.js"
   },
+  "types": "./index.d.ts",
   "engines": {
     "node": ">=8.11.4",
     "yarn": ">=1.6.0"
