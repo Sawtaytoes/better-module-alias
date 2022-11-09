@@ -55,7 +55,7 @@ const someModule = require('$utils/someModule')
 import someModule from '$utils/someModule'
 ```
 
-An *alternative* way is to call the betterModuleAlias function, pass the aliases as the second argument.
+An *alternative* way is to call the betterModuleAlias function, and pass the aliases as the second argument.
 ```js
 require('better-module-alias')(__dirname, {
   $tests: './tests',
