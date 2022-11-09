@@ -27,6 +27,7 @@ In your `package.json`, add a `_moduleAliases` object formatted like this:
 }
 ```
 
+
 - _**NOTE:** Prefixing with `$` is considered a best-practice so it doesn't interfere with `@`-scoped npm packages._
 - _**NOTE:** We prefix a `$` so it's obvious which imports are from npm packages and which come from `better-module-alias`._
 
@@ -52,6 +53,18 @@ const someModule = require('$utils/someModule')
 // or
 
 import someModule from '$utils/someModule'
+```
+
+An *alternative* way is to call the betterModuleAlias function, pass the aliases as the second argument.
+```js
+require('better-module-alias')(__dirname, {
+  $tests: './tests',
+  $utils: './utils',
+})
+```
+
+import betterModuleAlias from 'better-module-alias'
+betterModuleAlias(__dirname)
 ```
 
 #### Examples
