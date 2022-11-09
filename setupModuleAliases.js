@@ -84,14 +84,8 @@ const originalResolveFilename = (
 
 Module
 ._resolveFilename = (
-	function(requestedFilePath, parentModule, isMain) {
-		const alias = (
-			moduleAliasNames
-			.find(alias => (
-				requestedFilePath
-				.includes(alias)
-			))
-		)
+	function(requestedFilePath, parentModule, isMain) { 
+		const alias = moduleAliasNames.find((aliasStart) => requestedFilePath.startsWith(aliasStart));
 
 		const modifiedFilePath = (
 			alias
