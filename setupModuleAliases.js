@@ -151,15 +151,9 @@ const addModuleAliases = (
 const getAliasesFromPackageJson = (basePath) => {
   const packageJsonPath = basePath.concat("/package.json");
   const packageJson = require(packageJsonPath);
-  if (!packageJson)
-    throw new Error(`No package.json could be located at the path: ${packageJsonPath}
-	This path is determined based on the require('better-module-alias')('PATH-GOES-HERE'). It is recommended you use require('better-module-alias')(__dirname)`);
 
   const moduleAliases = packageJson._moduleAliases;
-  if (!moduleAliases)
-    throw new Error(
-      'No module aliases could be found in the package.json. Please add a "_moduleAliases" property to the package.json.'
-    );
+  if (!moduleAliases) throw new Error('No module aliases could be found in the package.json. Please add a "_moduleAliases" property to the package.json.');
 
   return moduleAliases;
 };
