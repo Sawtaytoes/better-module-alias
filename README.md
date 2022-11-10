@@ -1,12 +1,15 @@
 _[`better-module-alias`](https://www.npmjs.com/package/better-module-alias) is an improved version of the fantastic [`module-alias`](https://github.com/ilearnio/module-alias) package._
 
 # Better Module Alias
+
 Fix the issue of having to do relative paths like:
+
 ```
 require('../../../../some/deep/module')
 ```
 
 Instead, make your code look like:
+
 ```
 require('$utils/some/deep/module')
 ```
@@ -14,6 +17,7 @@ require('$utils/some/deep/module')
 ## How do I use it?
 
 ### package.json
+
 _This package uses the same `package.json` formatting as [`module-alias`](https://github.com/ilearnio/module-alias)._
 
 In your `package.json`, add a `_moduleAliases` object formatted like this:
@@ -22,65 +26,69 @@ In your `package.json`, add a `_moduleAliases` object formatted like this:
 {
   "_moduleAliases": {
     "$tests": "./tests",
-    "$utils": "./utils",
-  },
+    "$utils": "./utils"
+  }
 }
 ```
-
 
 - _**NOTE:** Prefixing with `$` is considered a best-practice so it doesn't interfere with `@`-scoped npm packages._
 - _**NOTE:** We prefix a `$` so it's obvious which imports are from npm packages and which come from `better-module-alias`._
 
 ### Node.js
+
 _**NOTE:** `better-module-alias` has to be imported before any `$` imports in your root code file, or it won't work._
 
 If you want to use `better-module-alias` in Node.js, you'll need to import this package at the top of the file that gets run in your `node` command such as `./index.js`.
 
 ```js
-require('better-module-alias')(__dirname)
+require("better-module-alias")(__dirname);
 
 // or
 
-import betterModuleAlias from 'better-module-alias'
-betterModuleAlias(__dirname)
+import betterModuleAlias from "better-module-alias";
+betterModuleAlias(__dirname);
 ```
 
 When you want to require an aliased file, do it like so:
 
 ```js
-const someModule = require('$utils/someModule')
+const someModule = require("$utils/someModule");
 
 // or
 
-import someModule from '$utils/someModule'
+import someModule from "$utils/someModule";
 ```
 
-An *alternative* way is to call the betterModuleAlias function, and pass the aliases as the second argument.
+An _alternative_ way is to call the betterModuleAlias function, and pass the aliases as the second argument.
+
 ```js
-require('better-module-alias')(__dirname, {
-  $tests: './tests',
-  $utils: './utils',
-})
-```
+// Method 1 (using package.json _moduleAliases)
+import betterModuleAlias from "better-module-alias";
+betterModuleAlias(__dirname);
 
-import betterModuleAlias from 'better-module-alias'
-betterModuleAlias(__dirname)
+// Method 2 (using the second argument as aliases)
+require("better-module-alias")(__dirname, {
+  $tests: "./tests",
+  $utils: "./utils",
+});
 ```
 
 #### Examples
 
 ##### Will work:
+
 ```js
 // index.js
-require('better-module-alias')(__dirname)
-const someModule = require('$utils/someModule')
+require("better-module-alias")(__dirname);
+const someModule = require("$utils/someModule");
 ```
 
 ##### Won't work:
+
 ```js
 // index.js
-const someModule = require('$utils/someModule')
-require('better-module-alias')(__dirname)
+const someModule = require("$utils/someModule");
+require("better-module-alias")(__dirname);
 ```
 
 #### Issues with `fs`
@@ -88,30 +96,27 @@ require('better-module-alias')(__dirname)
 Libraries like `fs` won't work with `better-module-alias` because it's overriding the `require` functionality of CommonJS, not file lookups in other libraries. The way to get around that is by using `require.resolve`.
 
 Where you might have done:
+
 ```js
-fs.readFile(
-  '../../../../some/deep/module',
-  callback,
-)
+fs.readFile("../../../../some/deep/module", callback);
 ```
 
 You can use `require.resolve` to do this instead:
+
 ```js
-fs.readFile(
-  require.resolve('$utils/some/deep/module'),
-  callback,
-)
+fs.readFile(require.resolve("$utils/some/deep/module"), callback);
 ```
 
 That'll allow you to get the same functionality without having to have 2 ways of writing the same code.
 
 ### Webpack
+
 Webpack has a built in support for aliases and custom modules directories.
 
 Add this code to your Webpack config to get it working with `better-module-alias`:
 
 ```js
-const packageJson = require('./package.json')
+const packageJson = require("./package.json");
 
 const webpackConfig = {
   // ...
@@ -121,7 +126,7 @@ const webpackConfig = {
     },
   },
   // ...
-}
+};
 ```
 
 ## FAQ
