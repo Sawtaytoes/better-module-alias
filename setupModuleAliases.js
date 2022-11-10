@@ -165,13 +165,14 @@ const getAliasesFromPackageJson = (basePath) => {
 };
 
 const setupModuleAliases = (basePath, functionImports) => {
-  if (functionImports) {
-    var aliases = functionImports;
-  } else {
-    var aliases = getAliasesFromPackageJson(basePath);
-  }
+	let aliases = []; 
+	if (functionImports) {
+		aliases = functionImports;
+	} else {
+		aliases = getAliasesFromPackageJson(basePath);
+	}
 
-  addModuleAliases(basePath, aliases);
+  	addModuleAliases(basePath, aliases);
 };
 
 module.exports = setupModuleAliases;
