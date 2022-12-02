@@ -14,7 +14,7 @@
     "yarn": ">=1.6.0"
   },
   "_moduleAliases": {
-    "$dirTest": "./dirTest"
+    "$test1": "./tests/dirTest1"
   },
   "publishConfig": {
     "access": "public"

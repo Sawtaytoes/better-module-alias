@@ -84,14 +84,8 @@ const originalResolveFilename = (
 
 Module
 ._resolveFilename = (
-	function(requestedFilePath, parentModule, isMain) {
-		const alias = (
-			moduleAliasNames
-			.find(alias => (
-				requestedFilePath
-				.includes(alias)
-			))
-		)
+	function(requestedFilePath, parentModule, isMain) { 
+		const alias = moduleAliasNames.find((aliasStart) => requestedFilePath.startsWith(aliasStart));
 
 		const modifiedFilePath = (
 			alias
@@ -154,25 +148,25 @@ const addModuleAliases = (
 	}
 )
 
-const getAliasList = (
-	basePath => (
-		require(
-			basePath
-			.concat('/package.json')
-		)
-		._moduleAliases
-	)
-)
+const getAliasesFromPackageJson = (basePath) => {
+  const packageJsonPath = basePath.concat("/package.json");
+  const packageJson = require(packageJsonPath);
 
-const setupModuleAliases = (
-	basePath => {
-		addModuleAliases(
-			basePath,
-			getAliasList(
-				basePath
-			),
-		)
+  const moduleAliases = packageJson._moduleAliases;
+  if (!moduleAliases) throw new Error('No module aliases could be found in the package.json. Please add a "_moduleAliases" property to the package.json.');
+
+  return moduleAliases;
+};
+
+const setupModuleAliases = (basePath, functionImports) => {
+	let aliases = []; 
+	if (functionImports) {
+		aliases = functionImports;
+	} else {
+		aliases = getAliasesFromPackageJson(basePath);
 	}
-)
 
-module.exports = setupModuleAliases
+  	addModuleAliases(basePath, aliases);
+};
+
+module.exports = setupModuleAliases;
